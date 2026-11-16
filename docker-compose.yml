@@ -1,0 +1,30 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    env_file:
+      - path: .env
+        required: false
+    volumes:
+      - buddy-data:/data
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8080/api/health')"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  # Тесты и отчёт о покрытии: docker compose --profile test run --rm tests
+  tests:
+    build: .
+    profiles: ["test"]
+    environment:
+      DATABASE_PATH: /tmp/test.db
+    command: >
+      python tools/coverage_report.py --fail-under 80
+      --html /report/html --text /report/coverage.txt
+    volumes:
+      - ./docs/coverage:/report
+
+volumes:
+  buddy-data:

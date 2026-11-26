@@ -14,7 +14,6 @@
 | SDD-спецификации | `specs/` |
 | Автотесты и отчёт о покрытии (99,4% строк приложения) | `backend/tests/`, `docs/coverage/` |
 | Архитектура и внедрение в Авито | `docs/architecture.md` |
-| Диплом участника Hack & Change 2026 | `certificates/diploma-hack-and-change-2026.png` |
 
 ## Быстрый запуск (Docker)
 
